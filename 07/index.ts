@@ -1,7 +1,6 @@
 
 function reverse(x: number): number {
   let res = 0;
-
   // x 不断左移，最后一定是 0
   while (x) {
     //每次取末尾数字
@@ -18,9 +17,9 @@ function reverse(x: number): number {
     }
 
     res = res * 10 + tmp;
-    x = ~~(x / 10);
+    x = x > 0 ? Math.floor(x / 10) : Math.ceil(x / 10)
   }
-
   return res;
 }
 
+reverse(-123)
