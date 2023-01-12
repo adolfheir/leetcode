@@ -1,37 +1,26 @@
 // https://leetcode.cn/problems/add-two-numbers/submissions/
-
-
-
- class ListNode {
-    val: number
-    next: ListNode | null
-    constructor(val?: number, next?: ListNode | null) {
-        this.val = (val === undefined ? 0 : val)
-        this.next = (next === undefined ? null : next)
-    }
-}
+import ListNode from "../_utils/ListNode";
 
 function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    const newList = new ListNode(0);
-    let cur = newList;
-    let curry = 0;
+    // 初始化哑结点 dmy
+    let dmy = new ListNode(0);
+    let curr = dmy;
+    // 进位
+    let addOne = 0;
 
-    let p1 = l1;
-    let p2 = l2;
+    while (addOne || l1 || l2) {
+        let val1 = l1 === null ? 0 : l1.val;
+        let val2 = l2 === null ? 0 : l2.val;
 
-    while (p1 || p2) {
-        let val1 = p1?.val ?? 0;
-        let var2 = p2?.val ?? 0;
-        let val = val1 + var2 + curry;
-        curry = Math.floor(val / 10);
-        cur.next = new ListNode(val % 10);
-        cur = cur.next;
-        if (p1) p1 = p1.next
-        if (p2) p2 = p2.next
+        let sum = val1 + val2 + addOne;
+        sum >= 10 ? addOne = 1 : addOne = 0;
+
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
+
+        if (l1 !== null) l1 = l1.next;
+        if (l2 !== null) l2 = l2.next;
     }
-    if (curry > 0) {
-        cur.next = new ListNode(curry);
-    }
 
-    return cur.next
+    return dmy.next;
 };

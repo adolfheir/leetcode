@@ -1,12 +1,17 @@
 {
     "compilerOptions": {
-        "sourceMap": true,
-        "outDir": "dist",
-        "strict": true,
-        "lib": [
-            "esnext"
-        ],
+        "target": "esnext",
+        "useDefineForClassFields": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "importHelpers": true,
+        "jsx": "react-jsx",
         "esModuleInterop": true,
-        "resolveJsonModule": true
-    }
+        "sourceMap": true,
+        "baseUrl": "./",
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "allowSyntheticDefaultImports": true
+    },
 }

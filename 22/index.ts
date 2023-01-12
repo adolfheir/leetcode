@@ -1,17 +1,13 @@
-import ListNode from "../_utils/ListNode"
-
-function mergeTwoLists(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    if (l1 == null) {
-        return l2;
+function generateParenthesis(n: number): string[] {
+    let set: Set<string> = new Set(['()']);
+    for (let c = 2; c <= n; c++) {
+        let nextSet:Set<string> = new Set();
+        for (const s of set) {
+            for (let j = 0; j <= s.length; j++) {
+                nextSet.add(s.slice(0, j) + '()' + s.slice(j));
+            }
+        }
+        set = nextSet;
     }
-    if (l2 == null) {
-        return l1;
-    }
-    if (l1.val <= l2.val) {
-        l1.next = mergeTwoLists(l1.next, l2);
-        return l1;
-    } else {
-        l2.next = mergeTwoLists(l1, l2.next);
-        return l2;
-    }
+    return [...set];
 };
